@@ -1,5 +1,4 @@
-- name: reload nginx
-  service:
-    name: nginx
-    state: reloaded
-  become: true
+---
+- name: Load os-specific handlers
+  include_tasks: "{{ ansible_sysstem}}.yml"
+  

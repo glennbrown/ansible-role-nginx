@@ -1,16 +1,17 @@
 ---
 __nginx_group: admin
+nginx_error_log: "/opt/homebrew/var/log/nginx/error.log warn"
+nginx_access_log: "/opt/homebrew/var/log/nginx/access.log main buffer=16k flush=2m"
+nginx_pidfile: /opt/homebrew/var/run/nginx.pid
+nginx_mime_file_path: /opt/homebrew/etc/nginx/mime.types
+
 nginx_config_dir: /opt/homebrew/etc/nginx
 nginx_conf_path: /opt/homebrew/etc/nginx/conf.d
 nginx_conf_file_path: /opt/homebrew/etc/nginx/nginx.conf
 nginx_proxy_params_file_path: /opt/homebrew/etc/nginx/proxy_params
 nginx_dhparams_file_path: /opt/homebrew/etc/nginx/dhparams.pem
-nginx_vhost_path: /opt/homebrew/etc/nginx/server
 
-nginx_error_log: "/opt/homebrew/var/log/nginx/error.log warn"
-nginx_access_log: "/opt/homebrew/var/log/nginx/access.log main buffer=16k flush=2m"
-nginx_pidfile: /opt/homebrew/var/run/nginx.pid
-nginx_mime_file_path: /opt/homebrew/etc/nginx/mime.types
+nginx_vhost_path: /opt/homebrew/etc/nginx/server
 
 nginx_packages:
   - nginx
