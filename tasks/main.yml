@@ -1,15 +1,57 @@
 ---
+- name: Load OS-specific vars
+  include_vars: "{{ lookup('first_found', params) }}"
+  vars:
+    params:
+      files:
+        - '{{ ansible_os_family.yml }}'
+      paths:
+        - 'vars'
 
-- name: Install nginx
-  apt:
-    name: "{{ item }}"
-    update_cache: yes
-    cache_valid_time: 3600
-  loop:
-    - nginx-full
-    - nginx-extras
-    - libnginx-mod-http-headers-more-filter
-    - libnginx-mod-http-brotli-filter
-    - libnginx-mod-stream
+- include_tasks: setup-Debian.yml
+  when: ansible_os_family == 'Debian'
 
-- include_tasks: config.yml
+- include_tasks: setup-Darwin.yml
+  when: ansible_os_family == 'Darwin'
+
+# Vhost configuration
+- imports_tasks: vhosts.yml
+
+# Nginx setup
+- name: Download Diffie-Hellman Parameters
+  get_url:
+    url: "{{ dhparams_pem_download }}"
+    dest: "{{ nginx_dhparams_file_path }}"
+    mode: 0440
+    group: "{{ __nginx_group }}"
+
+- name: Ensure config path exists
+  file:
+    path: "{{ nginx_conf_path }}"
+    state: directory
+    mode: 0755
+    group: "{{ __nginx_group }}"
+
+- name: Copy nginx configuration in place
+  template:
+    src: "{{ nginx_conf_template }}"
+    dest: "{{ nginx_conf_file_path }}"
+    mode: 0644
+    group: "{{ __nginx_group }}"
+  notify: reload nginx
+
+- name: Copy proxy configuration
+  template:
+    src: "{{ nginx_proxy_template }}"
+    dest: "{{ nginx_proxy_params_file_path }}"
+    mode: 0644
+    group: "{{ __nginx_group }}"
+  notify: reload nginx
+
+- name: Copy ssl configuration
+  template:
+    src: "{{ nginx_ssl_template }}"
+    dest: "{{ nginx_conf_path }}/ssl.conf"
+    mode: 0644
+    group: "{{ __nginx_group }}"
+  notify: reload nginx
