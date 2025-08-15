@@ -5,9 +5,6 @@ nginx_proxy_template: "proxy_params.j2"
 nginx_ssl_template: "ssl.conf.j2"
 nginx_hsts_file: "nginx-https-redirect.conf"
 
-nginx_service_state: started
-nginx_service_enabled: true
-
 dhparams_pem_download: 'https://ssl-config.mozilla.org/ffdhe2048.txt'
 
 nginx_worker_processes: >-

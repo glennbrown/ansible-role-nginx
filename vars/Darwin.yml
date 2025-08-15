@@ -13,6 +13,8 @@ nginx_dhparams_file_path: /opt/homebrew/etc/nginx/dhparams.pem
 
 nginx_vhost_path: /opt/homebrew/etc/nginx/server
 
+nginx_service_state: present
+
 nginx_packages:
   - nginx
   - brotli

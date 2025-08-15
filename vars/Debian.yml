@@ -15,6 +15,9 @@ nginx_dhparams_file_path: /etc/nginx/dhparams.pem
 nginx_vhost_path: /etc/nginx/sites-enabled
 nginx_default_vhost_path: /etc/nginx/sites-enabled/default
 
+nginx_service_state: started
+nginx_service_enabled: true
+
 nginx_extra_conf_options: |
   include /etc/nginx/modules-enabled/*.conf;
 

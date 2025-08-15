@@ -55,3 +55,15 @@
     mode: 0644
     group: "{{ __nginx_group }}"
   notify: reload nginx
+
+- name: Ensure nginx service is running as configured
+  block:
+    - service: 
+        name: nginx
+        state: "{{ nginx_service_state }}"
+        enabled: "{{ nginx_service_enabled }}"
+      when: ansible_system = 'Linux'
+    - homebrew_services:
+        name: nginx
+        state: "{{ nginx_service_state }}"
+      when: ansible_system == 'Darwin'

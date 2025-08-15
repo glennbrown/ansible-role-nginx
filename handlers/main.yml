@@ -1,4 +1,4 @@
 ---
 - name: Load os-specific handlers
-  include_tasks: "{{ ansible_sysstem}}.yml"
+  include_tasks: "{{ ansible_system }}.yml"
   
