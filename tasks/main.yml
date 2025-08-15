@@ -50,14 +50,15 @@
     group: "{{ __nginx_group }}"
   notify: reload nginx
 
-- name: Ensure nginx service is running as configured
-  block:
-    - service: 
-        name: nginx
-        state: "{{ nginx_service_state }}"
-        enabled: "{{ nginx_service_enabled }}"
-      when: ansible_system = 'Linux'
-    - community.general.homebrew_services:
-        name: nginx
-        state: "{{ nginx_service_state }}"
-      when: ansible_system == 'Darwin'
+- name: Linux - Ensure nginx service is running as configured
+  service: 
+    name: nginx
+    state: "{{ nginx_service_state }}"
+    enabled: "{{ nginx_service_enabled }}"
+  when: ansible_system = 'Linux'
+
+- name: MacOS - Ensure nginx service is running as configured
+  community.general.homebrew_services:
+    name: nginx
+    state: "{{ nginx_service_state }}"
+  when: ansible_system == 'Darwin'
