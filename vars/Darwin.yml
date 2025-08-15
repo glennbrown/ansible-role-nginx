@@ -11,7 +11,7 @@ nginx_conf_file_path: /opt/homebrew/etc/nginx/nginx.conf
 nginx_proxy_params_file_path: /opt/homebrew/etc/nginx/proxy_params
 nginx_dhparams_file_path: /opt/homebrew/etc/nginx/dhparams.pem
 
-nginx_vhost_path: /opt/homebrew/etc/nginx/server
+nginx_vhost_path: /opt/homebrew/etc/nginx/servers
 
 nginx_service_state: present
 
