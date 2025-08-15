@@ -15,7 +15,7 @@
   when: ansible_os_family == 'Darwin'
 
 # Vhost configuration
-- imports_tasks: vhosts.yml
+- import_tasks: vhosts.yml
 
 # Nginx setup
 - name: Download Diffie-Hellman Parameters
