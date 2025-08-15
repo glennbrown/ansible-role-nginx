@@ -1,5 +1,5 @@
 ---
 - name: reload nginx
-  homebrew_services:
+  community.general.homebrew_services:
     name: nginx
     state: restarted
