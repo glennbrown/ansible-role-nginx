@@ -55,7 +55,7 @@
     name: nginx
     state: "{{ nginx_service_state }}"
     enabled: "{{ nginx_service_enabled }}"
-  when: ansible_system = 'Linux'
+  when: ansible_system == 'Linux'
 
 - name: MacOS - Ensure nginx service is running as configured
   community.general.homebrew_services:
