@@ -1,12 +1,6 @@
 ---
 - name: Load os-specific vars
-  include_vars: "{{ lookup('first_found', params) }}"
-  vars:
-    params:
-      files:
-        - '{{ ansible_os_family.yml }}'
-      paths:
-        - 'vars'
+  include_vars: "{{ ansible_os_family }}.yml"
 
 - include_tasks: setup-Debian.yml
   when: ansible_os_family == 'Debian'
